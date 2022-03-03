@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Fuzzware Pipline</title>
+    <link href="/2022/03/03/fuzzware-pipline/"/>
+    <url>/2022/03/03/fuzzware-pipline/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Fuzzware-Pipline"><a href="#Fuzzware-Pipline" class="headerlink" title="Fuzzware Pipline"></a>Fuzzware Pipline</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>该项目旨在提供涵盖fuzzware各个方面的作业分布，来fuzzing裸机固件映像。‎</p><p>‎大多数实际工作都是由fuzzing 工作线程使用fuzzware的仿真组件作为工具执行的。实现此工具的代码驻留在fuzzware-emulator存储库中。‎</p><p>‎所需功能的不同部分组合在一起：‎</p><ol><li>‎给定配置文件的二进制固件映像文件的基线模糊测试。此作业由可配置数量的模糊测试进程执行‎</li><li>‎针对给定固件环境抛出输入文件时生成跟踪文件‎</li><li>‎生成用于 MMIO 模型生成的 MMIO 访问状态文件‎</li><li>‎使用 angr 生成 MMIO 模型‎</li></ol><h2 id="‎在fuzzware项目目录中运行输入‎"><a href="#‎在fuzzware项目目录中运行输入‎" class="headerlink" title="‎在fuzzware项目目录中运行输入‎"></a>‎在fuzzware项目目录中运行输入‎</h2><p>​    为了了解如何配置模拟器以运行由fuzzware项目目录中的fuzzer生成的输入，我们将首先以手动方式（使用原始<code>fuzzware emu</code>程序）和简单方法（使用方便包装器fuzzware replay）重现模拟器行为。‎</p><p>​    将<code>project/mainXXX</code>目录与程序<code>fuzzware-fuzzware emu</code>一起使用，可以重现目录中对于给定输入，固件执行的确切行为。要重新运行给定输入文件的仿真，请使用精确配置文件fuzzware-project&#x2F;mainXXX&#x2F;config.yml 、命令行选项<code>fuzzware-project/mainXXX/extra_args.txt</code>（除了使用自定义描述的管道配置除外），用于模糊测试器输入目录或崩溃目录(<code>fuzzware-project/mainXXX/fuzzers/fuzzer1/queue/id:000000,*</code> 和<code>fuzzware-project/mainXXX/fuzzers/fuzzer1/crashes/id:000000,*</code>)之一中的输入文件 。‎</p><p>​    ‎由于 <code>fuzzware emu</code>的命令行参数在‎<code>fuzzware-project/mainXXX</code>目录中可能变得不好用，因此您使用<code>fuzzware replay</code>自动将这些参数放在一起：</p><p>‎以下fuzzware emu命令行（您仍然需要处理extra_args.txt中的相对路径）：‎</p><figure class="highlight gradle"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs gradle">fuzzware emu -c fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>config.yml $(cat fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>extra_args.txt) fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>fuzzers<span class="hljs-regexp">/fuzzer1/</span>queue/id:<span class="hljs-number">000000</span>,orig:<span class="hljs-number">01</span>_base_input_512_ones<br></code></pre></td></tr></table></figure><p>也可以写成:</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">fuzzware replay fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>fuzzers<span class="hljs-regexp">/fuzzer1/</span>queue/id:<span class="hljs-number">000000</span>,orig:<span class="hljs-number">01</span>_base_input_512_ones<br></code></pre></td></tr></table></figure><h2 id="‎工作分配‎"><a href="#‎工作分配‎" class="headerlink" title="‎工作分配‎"></a>‎工作分配‎</h2><p>‎    pipline 作为软件的一个重要部分，使用python ‎<a href="https://python-rq.org/">‎rq‎</a>‎将作业推送到redis数据库。‎</p><p>‎    pipline可以生成一组工作线程，这些工作线程从 redis 队列中检索作业，生成作业结果文件并将其放置在特定目录中。‎</p><p>‎    管道异步观察用于添加新作业的结果文件的结果目录（在 src&#x2F;observers中实现）。观察到新文件后，将其路径添加到的某个内部结果队列中。‎</p><p>​    ‎管道的主循环忙于检查队列中是否有新条目。‎‎对于给定的结果文件路径，它遵守命名‎‎约定‎‎‎，导出‎‎有关事件的信息‎ (‎例如，跟踪的输出文件对应的输入文件路径‎‎）， 并在必要时分析结果文件。然后，它将新作业推送到 redis 队列。‎</p><h2 id="pipline-工作流"><a href="#pipline-工作流" class="headerlink" title="pipline 工作流:"></a>pipline 工作流:</h2><p>‎为了使导航代码更容易，此处介绍了典型的代码流。‎</p><p>‎典型的作业工作流当前如下所示：</p><p>​    0.调用后，<strong>fuzzware_pipeline.py</strong>创建一个<strong>session</strong>实例，该实例为<strong>fuzzer输入queue目录</strong>等目录中的新文件设置侦听器‎</p><ol><li>‎启动后，管道开始对实例进行<strong>模糊测试</strong>，这些实例开始使用<strong>给定的配置</strong>对<strong>固件映像</strong>进行模糊测试‎</li><li>‎其中一个模糊测试实例在其queue目录中生成新输入</li><li>‎observers.new_fuzz_input_handler.py被触发并将文件的路径添加到主循环的模糊测试输入队列‎</li><li>‎主循环检查不同的队列，并在其<code>queue_fuzz_inputs</code>成员中找到新的模糊测试输入文件的路径‎</li><li>‎它计算文件的哈希值，并将新的跟踪生成作业推送到 redis 作业队列。‎</li><li>‎其中一个 <strong>gen</strong> 工作线程执行此作业并为给定输入生成跟踪。它将生成的跟踪文件放在模糊测试器的<strong>trace子目录</strong>中。‎</li><li>‎与 3类似，<code>observers.new_trace_file_handler.py</code>触发并将文件的路径添加到主循环的跟踪输入队列中‎</li><li>‎与 4 类似，主循环在其<code>queue_traces</code>成员中注意到一个新条目‎</li><li>‎与5 类似，主循环（在检查是否已创建所有跟踪类型之后）会记录新基本块跟踪中的所有基本块地址。对于跟踪文件中以前从未见过的每个 MMIO 访问，它会将 MMIO 访问状态生成作业推送到 redis 队列。‎</li><li>‎与6类似，其中一个工作线程承担了这份工作，并在MMIO访问之前生成状态。它将生成的状态文件放在项目根目录的mmio_states目录中。‎</li><li>‎与 3和 7一样，<code>observers.new_mmio_state_handler.py</code>触发，将路径馈送到主循环。主循环将建模作业推送到 ‎<code>modeling</code>redis 队列。</li><li>‎<code>modeling</code>作业被拾取，MMIO寄存器配置使用angr生成并推送到项目根目录的<code>config_snippets</code>目录中。‎</li><li>‎使用与以前相同的observer机制，新的配置代码段最终由主循环选取，并合并到项目根目录中的最新配置文件 （mmio_config.yml）。‎</li></ol><p>‎    一旦存在足够的 MMIO 模型配置更新，管道将使用更新的配置重新启动模糊测试实例，以实现更高效的模糊测试进度。‎</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>物联网安全</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing</title>
     <link href="/2022/03/02/paperReading/"/>
     <url>/2022/03/02/paperReading/</url>
