@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>shell 教程</title>
+    <link href="/2022/03/04/shell/"/>
+    <url>/2022/03/04/shell/</url>
+    
+    <content type="html"><![CDATA[<h1 id="最常用的shell-Bash"><a href="#最常用的shell-Bash" class="headerlink" title="最常用的shell:Bash"></a>最常用的shell:Bash</h1><h2 id="第一个shell脚本"><a href="#第一个shell脚本" class="headerlink" title="第一个shell脚本"></a>第一个shell脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span><br>echo &quot;Hello world!&quot;<br></code></pre></td></tr></table></figure><p>#!是一个约定的标记，告诉系统使用shell的类型</p><p><strong>运行shell脚本</strong></p><ol><li><p>作为可执行程序</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">chmod +x ./test.sh #使脚本有执行权限<br>./test.sh #执行脚本<br></code></pre></td></tr></table></figure></li><li><p>作为解释器参数</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">/bin/sh test.sh<br>/bin/php test.php<br></code></pre></td></tr></table></figure></li></ol><h2 id="Shell-变量"><a href="#Shell-变量" class="headerlink" title="Shell 变量"></a>Shell 变量</h2><p><strong>定义变量</strong>时变量名不加美元符号($)</p><ul><li>注意 变量名和等号之间不能有空格</li><li>不能有<strong>空格</strong></li><li>不能使用<strong>标点</strong>，不能使用<strong>bash关键字</strong></li><li>命名只能使用英文字母数字和下划线，不能<strong>数字开头</strong></li></ul><p><strong>使用变量</strong>:</p><p>​    使用一个变量只要在变量名前面＋美元符号即可(“{}”是可选项，为了帮助解释器识别变量的<strong>边界</strong>)</p><p><strong>已经使用的变量</strong>，<strong>可以重新定义</strong></p><p><strong>只读变量</strong>:</p><p>readonly 命令可以使变量定义为只读变量</p><p><strong>删除变量</strong>:</p><p>unset var 删除变量 var</p><p><strong>变量类型</strong></p><ul><li>局部变量</li><li>环境变量</li><li>shell变量</li></ul><h2 id="Shell字符串"><a href="#Shell字符串" class="headerlink" title="Shell字符串"></a>Shell字符串</h2><p><strong>单引号</strong></p><p>str &#x3D;’this is a str’</p><ul><li>单引号中任何字符都会原样输出，变量是无效的</li><li>单引号字串中不能出现单独的一个引号，但可以成对出现</li></ul><p><strong>双引号</strong></p><ul><li>双引号里可以有变量</li><li>可以出现转义字符</li></ul><p><strong>获取字符串长度</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">str =&quot;abcd<br>echo $&#123;#string&#125; #输出 4<br></code></pre></td></tr></table></figure><p><strong>提取子字符串</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo $&#123;string1:4&#125;<br></code></pre></td></tr></table></figure><p><strong>查找子字符串</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">string = &quot;oi&quot;<br>echo `expr index &quot;$string&quot; io` #输出 i/o的位置 谁先出现，输出谁<br></code></pre></td></tr></table></figure><h2 id="Shell-数组"><a href="#Shell-数组" class="headerlink" title="Shell 数组"></a>Shell 数组</h2><p><strong>定义数组</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">数组名=(v1,v2,v3)<br></code></pre></td></tr></table></figure><p><strong>读取数组</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="language-bash">&#123;数组名[下标]&#125;</span><br><span class="hljs-meta">$</span><span class="language-bash">&#123;数组[@]&#125; <span class="hljs-comment">#@可以获取数组中的所有元素</span></span><br></code></pre></td></tr></table></figure><h2 id="Shell-注释"><a href="#Shell-注释" class="headerlink" title="Shell 注释"></a>Shell 注释</h2><p># 开头的行就是注释，每行添加#就是多行注释</p><p><strong>多行注释</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">:&lt;&lt;EOF<br><span class="hljs-meta">#</span><span class="language-bash">内容</span><br>EOF #EOF可以替换成任意字符<br></code></pre></td></tr></table></figure><h2 id="Shell-传递参数"><a href="#Shell-传递参数" class="headerlink" title="Shell 传递参数"></a>Shell 传递参数</h2><p>脚本内获取参数的格式是:$n 其中$0是执行的文件名</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span><br><span class="hljs-meta"># </span><span class="language-bash">author:菜鸟教程</span><br><span class="hljs-meta"># </span><span class="language-bash">url:www.runoob.com</span><br><br>echo &quot;Shell 传递参数实例！&quot;;<br>echo &quot;执行的文件名：$0&quot;;<br>echo &quot;第一个参数为：$1&quot;;<br>echo &quot;第二个参数为：$2&quot;;<br>echo &quot;第三个参数为：$3&quot;;<br></code></pre></td></tr></table></figure><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody><tr><td>$#</td><td>传递到脚本的参数个数</td></tr><tr><td>$*</td><td>以一个单字符串显示所有向脚本传递的参数。 如”$*”用「”」括起来的情况、以”$1 $2 … $n”的形式输出所有参数。</td></tr><tr><td>$$</td><td>脚本运行的当前进程ID号</td></tr><tr><td>$!</td><td>后台运行的最后一个进程的ID号</td></tr><tr><td>$@</td><td>与$*相同，但是使用时加引号，并在引号中返回每个参数。 如”$@”用「”」括起来的情况、以”$1” “$2” … “$n” 的形式输出所有参数。</td></tr><tr><td>$-</td><td>显示Shell使用的当前选项，与<a href="https://www.runoob.com/linux/linux-comm-set.html">set命令</a>功能相同。</td></tr><tr><td>$?</td><td>显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</td></tr></tbody></table><h2 id="Shell-数组-1"><a href="#Shell-数组-1" class="headerlink" title="Shell 数组"></a>Shell 数组</h2><p>Bash 只支持<strong>一维数组</strong>，初始化时不需要定义数组大小</p><p><strong>定义数组</strong></p><ul><li>shell<strong>数组用括号来表示</strong>，元素用空格符号分割开，语法如下:</li></ul><p>​    array_name&#x3D;(value1,value2,value3……)</p><ul><li>也可以使用<strong>下标定义数组</strong></li></ul><p><strong>读取数组</strong>:$(array_name[index])</p><p>@或者*可以获取数组中的所有元素</p><p><strong>数组长度</strong> $</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>新手教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>脚本</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>第三章 技术综述</title>
+    <link href="/2022/03/03/cortex-M3%20M4/"/>
+    <url>/2022/03/03/cortex-M3%20M4/</url>
+    
+    <content type="html"><![CDATA[<h2 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h2><p><strong>类型</strong>:</p><p>ARM Cortex-M 为32位 RISC处理器，具有:</p><ul><li>32位寄存器</li><li>32位内部数据通路</li><li>32位总线接口</li></ul><p>ARM Cortex-M 处理器的存储系统32位寻址，地址空间最大为4GB</p><p><strong>架构</strong>:</p><ul><li>架构:指令集架构(ISA) ,编程模型以及调试方法</li><li>微架构:接口信号，指令执行时序以及流水线阶段实现相关的细节，微架构为处理器相关</li></ul><p>ARM-Cortex-M3&#x2F;M4 都基于 ARMv7-M架构。</p><p><strong>指令集</strong>：</p><ul><li>Cortex-M 处理器使用的指令集为Thumb(包括16位和32位指令)</li><li>Cortex-M3&#x2F;M4 用到了Thumb-2技术，允许16位和32位指令混合使用</li></ul><p><strong>模块框图</strong>:</p><p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304094617710.png" alt="image-20220304094617710"></p><p><strong>存储器系统:</strong></p><p>cortex-M3&#x2F;M4本身不包含存储器</p><p>cortex-M3&#x2F;M4使用的总线接口协议为AHB Lite(高级高性能总线)</p><p><strong>中断和异常支持</strong>:</p><p>NVIC 嵌套向量中断控制器 </p><p>NVIC 支持多个系统异常，包括不可屏蔽中和处理器内部的其他异常源</p><h1 id="第4章-架构"><a href="#第4章-架构" class="headerlink" title="第4章 架构"></a>第4章 架构</h1><p><strong>编程模型</strong>:</p><p>操作状态</p><ul><li>调试状态:处理器被暂停</li><li>Thumb状态:处理器在执行程序代码(Thumb指令)</li></ul><p>操作模式</p><ul><li>处理模式:执行中断服务程序(ISR)等异常处理，具有特权访问等级</li><li>线程模式:执行普通的应用程序代码</li></ul><p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304103217521.png" alt="image-20220304103217521"></p><p><strong>寄存器:</strong></p><ol><li><p>R0-R12 通用目的寄存器</p></li><li><p>R13栈指针(SP) MSP(主栈指针) PSP(进程栈指针)</p></li><li><p>R14链接寄存器LR，用于函数或者自称程序调用时返回地址的保存</p></li><li><p>R15 程序计数器PC </p><ul><li>读操作返回当前指令地址+4 </li><li>写操作会引起跳转操作</li></ul></li></ol><p><strong>特殊寄存器</strong>:</p><ol><li><p>程序状态寄存器</p><ul><li>应用PSR(APSR) </li><li>执行PSR(EPSR)</li><li>中断PSR(IPSR)</li></ul></li><li><p>PREMASK FAULTMASK BASEPRI寄存器</p><p>用于异常或中断屏蔽</p></li><li><p>CONTROL 寄存器</p><p>定义:栈指针的选择&#x2F;线程模式的访问等级</p></li></ol><p>​       位域:nPRIV(特权等级) FPCA(栈指针的选择) SPSEL(浮点上下文活跃)</p><p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304105431314.png" alt="image-20220304105431314"></p><p><strong>浮点寄存器</strong>:</p><ol><li><p>S0-S31 D0-D15</p><p>S0 -S31 都是32位寄存器，而且每个都可以通过浮点指令访问，或者利用D0-D15成对访问</p></li></ol><p>2.浮点状态和控制寄存器(FPSCR)</p><p>3.经过存储器映射的浮点单元控制寄存器</p><h2 id="应用程序状态寄存器-ASPR"><a href="#应用程序状态寄存器-ASPR" class="headerlink" title="应用程序状态寄存器(ASPR)"></a>应用程序状态寄存器(ASPR)</h2><p>整数状态标志(N-Z-C-V)</p><p>饱和运算的状态标志(Q)</p><p>SIMD运算的状态标志(GE)</p><h2 id="存储器系统"><a href="#存储器系统" class="headerlink" title="存储器系统"></a>存储器系统</h2><p><strong>特点</strong>:</p><ul><li>4GB 线性地址空间</li><li>架构定义的存储器映射</li><li>支持大端和小端的存储器系统</li><li>位段访问</li><li>写缓冲</li><li>存储保护单元</li><li>非对齐保护传输支持</li></ul><p><strong>存储器映射</strong></p><ul><li>cortex-M处理器的4GB地址空间，被划分为不同区域:<ul><li>程序代码访问</li><li>数据访问</li><li>外设</li><li>处理器内部控制和调试部件</li></ul></li></ul><p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304111833456.png" alt="image-20220304111833456"></p><p><strong>栈存储</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>物联网安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ARM Cortex-M3/M4</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Fuzzware Pipline</title>
     <link href="/2022/03/03/fuzzware-pipline/"/>
     <url>/2022/03/03/fuzzware-pipline/</url>

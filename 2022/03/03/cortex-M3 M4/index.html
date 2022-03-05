@@ -16,20 +16,26 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Fuzzware Pipline作用该项目旨在提供涵盖fuzzware各个方面的作业分布，来fuzzing裸机固件映像。‎ ‎大多数实际工作都是由fuzzing 工作线程使用fuzzware的仿真组件作为工具执行的。实现此工具的代码驻留在fuzzware-emulator存储库中。‎ ‎所需功能的不同部分组合在一起：‎  ‎给定配置文件的二进制固件映像文件的基线模糊测试。此作业由可配置数量的模糊测">
+    <meta name="description" content="处理器类型: ARM Cortex-M 为32位 RISC处理器，具有:  32位寄存器 32位内部数据通路 32位总线接口  ARM Cortex-M 处理器的存储系统32位寻址，地址空间最大为4GB 架构:  架构:指令集架构(ISA) ,编程模型以及调试方法 微架构:接口信号，指令执行时序以及流水线阶段实现相关的细节，微架构为处理器相关  ARM-Cortex-M3&#x2F;M4 都基于">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fuzzware Pipline">
-<meta property="og:url" content="http://example.com/2022/03/03/fuzzware-pipline/index.html">
+<meta property="og:title" content="第三章 技术综述">
+<meta property="og:url" content="http://example.com/2022/03/03/cortex-M3%20M4/index.html">
 <meta property="og:site_name" content="炭治郎の烧烤摊">
-<meta property="og:description" content="Fuzzware Pipline作用该项目旨在提供涵盖fuzzware各个方面的作业分布，来fuzzing裸机固件映像。‎ ‎大多数实际工作都是由fuzzing 工作线程使用fuzzware的仿真组件作为工具执行的。实现此工具的代码驻留在fuzzware-emulator存储库中。‎ ‎所需功能的不同部分组合在一起：‎  ‎给定配置文件的二进制固件映像文件的基线模糊测试。此作业由可配置数量的模糊测">
+<meta property="og:description" content="处理器类型: ARM Cortex-M 为32位 RISC处理器，具有:  32位寄存器 32位内部数据通路 32位总线接口  ARM Cortex-M 处理器的存储系统32位寻址，地址空间最大为4GB 架构:  架构:指令集架构(ISA) ,编程模型以及调试方法 微架构:接口信号，指令执行时序以及流水线阶段实现相关的细节，微架构为处理器相关  ARM-Cortex-M3&#x2F;M4 都基于">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-03T13:36:24.882Z">
-<meta property="article:modified_time" content="2022-03-03T13:46:48.100Z">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220304094617710.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220304103217521.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220304105431314.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220304111833456.png">
+<meta property="article:published_time" content="2022-03-03T13:50:36.874Z">
+<meta property="article:modified_time" content="2022-03-04T03:19:13.990Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ARM Cortex-M3&#x2F;M4">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220304094617710.png">
   
   
-  <title>Fuzzware Pipline - 炭治郎の烧烤摊</title>
+  <title>第三章 技术综述 - 炭治郎の烧烤摊</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -187,7 +193,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Fuzzware Pipline">
+            <span class="h2" id="subtitle" title="第三章 技术综述">
               
             </span>
 
@@ -197,7 +203,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-03 21:36" pubdate>
+      <time datetime="2022-03-03 21:50" pubdate>
         2022年3月3日 晚上
       </time>
     </span>
@@ -208,7 +214,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      1.1k 字
     </span>
   
 
@@ -217,7 +223,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21 分钟
+      9 分钟
     </span>
   
 
@@ -246,52 +252,114 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Fuzzware Pipline</h1>
+            <h1 style="display: none">第三章 技术综述</h1>
             
             <div class="markdown-body">
-              <h1 id="Fuzzware-Pipline"><a href="#Fuzzware-Pipline" class="headerlink" title="Fuzzware Pipline"></a>Fuzzware Pipline</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>该项目旨在提供涵盖fuzzware各个方面的作业分布，来fuzzing裸机固件映像。‎</p>
-<p>‎大多数实际工作都是由fuzzing 工作线程使用fuzzware的仿真组件作为工具执行的。实现此工具的代码驻留在fuzzware-emulator存储库中。‎</p>
-<p>‎所需功能的不同部分组合在一起：‎</p>
+              <h2 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h2><p><strong>类型</strong>:</p>
+<p>ARM Cortex-M 为32位 RISC处理器，具有:</p>
+<ul>
+<li>32位寄存器</li>
+<li>32位内部数据通路</li>
+<li>32位总线接口</li>
+</ul>
+<p>ARM Cortex-M 处理器的存储系统32位寻址，地址空间最大为4GB</p>
+<p><strong>架构</strong>:</p>
+<ul>
+<li>架构:指令集架构(ISA) ,编程模型以及调试方法</li>
+<li>微架构:接口信号，指令执行时序以及流水线阶段实现相关的细节，微架构为处理器相关</li>
+</ul>
+<p>ARM-Cortex-M3&#x2F;M4 都基于 ARMv7-M架构。</p>
+<p><strong>指令集</strong>：</p>
+<ul>
+<li>Cortex-M 处理器使用的指令集为Thumb(包括16位和32位指令)</li>
+<li>Cortex-M3&#x2F;M4 用到了Thumb-2技术，允许16位和32位指令混合使用</li>
+</ul>
+<p><strong>模块框图</strong>:</p>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304094617710.png" srcset="/img/loading.gif" lazyload alt="image-20220304094617710"></p>
+<p><strong>存储器系统:</strong></p>
+<p>cortex-M3&#x2F;M4本身不包含存储器</p>
+<p>cortex-M3&#x2F;M4使用的总线接口协议为AHB Lite(高级高性能总线)</p>
+<p><strong>中断和异常支持</strong>:</p>
+<p>NVIC 嵌套向量中断控制器 </p>
+<p>NVIC 支持多个系统异常，包括不可屏蔽中和处理器内部的其他异常源</p>
+<h1 id="第4章-架构"><a href="#第4章-架构" class="headerlink" title="第4章 架构"></a>第4章 架构</h1><p><strong>编程模型</strong>:</p>
+<p>操作状态</p>
+<ul>
+<li>调试状态:处理器被暂停</li>
+<li>Thumb状态:处理器在执行程序代码(Thumb指令)</li>
+</ul>
+<p>操作模式</p>
+<ul>
+<li>处理模式:执行中断服务程序(ISR)等异常处理，具有特权访问等级</li>
+<li>线程模式:执行普通的应用程序代码</li>
+</ul>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304103217521.png" srcset="/img/loading.gif" lazyload alt="image-20220304103217521"></p>
+<p><strong>寄存器:</strong></p>
 <ol>
-<li>‎给定配置文件的二进制固件映像文件的基线模糊测试。此作业由可配置数量的模糊测试进程执行‎</li>
-<li>‎针对给定固件环境抛出输入文件时生成跟踪文件‎</li>
-<li>‎生成用于 MMIO 模型生成的 MMIO 访问状态文件‎</li>
-<li>‎使用 angr 生成 MMIO 模型‎</li>
+<li><p>R0-R12 通用目的寄存器</p>
+</li>
+<li><p>R13栈指针(SP) MSP(主栈指针) PSP(进程栈指针)</p>
+</li>
+<li><p>R14链接寄存器LR，用于函数或者自称程序调用时返回地址的保存</p>
+</li>
+<li><p>R15 程序计数器PC </p>
+<ul>
+<li>读操作返回当前指令地址+4 </li>
+<li>写操作会引起跳转操作</li>
+</ul>
+</li>
 </ol>
-<h2 id="‎在fuzzware项目目录中运行输入‎"><a href="#‎在fuzzware项目目录中运行输入‎" class="headerlink" title="‎在fuzzware项目目录中运行输入‎"></a>‎在fuzzware项目目录中运行输入‎</h2><p>​    为了了解如何配置模拟器以运行由fuzzware项目目录中的fuzzer生成的输入，我们将首先以手动方式（使用原始<code>fuzzware emu</code>程序）和简单方法（使用方便包装器fuzzware replay）重现模拟器行为。‎</p>
-<p>​    将<code>project/mainXXX</code>目录与程序<code>fuzzware-fuzzware emu</code>一起使用，可以重现目录中对于给定输入，固件执行的确切行为。要重新运行给定输入文件的仿真，请使用精确配置文件fuzzware-project&#x2F;mainXXX&#x2F;config.yml 、命令行选项<code>fuzzware-project/mainXXX/extra_args.txt</code>（除了使用自定义描述的管道配置除外），用于模糊测试器输入目录或崩溃目录(<code>fuzzware-project/mainXXX/fuzzers/fuzzer1/queue/id:000000,*</code> 和<code>fuzzware-project/mainXXX/fuzzers/fuzzer1/crashes/id:000000,*</code>)之一中的输入文件 。‎</p>
-<p>​    ‎由于 <code>fuzzware emu</code>的命令行参数在‎<code>fuzzware-project/mainXXX</code>目录中可能变得不好用，因此您使用<code>fuzzware replay</code>自动将这些参数放在一起：</p>
-<p>‎以下fuzzware emu命令行（您仍然需要处理extra_args.txt中的相对路径）：‎</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs gradle">fuzzware emu -c fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>config.yml $(cat fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>extra_args.txt) fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>fuzzers<span class="hljs-regexp">/fuzzer1/</span>queue/id:<span class="hljs-number">000000</span>,orig:<span class="hljs-number">01</span>_base_input_512_ones<br></code></pre></td></tr></table></figure>
-
-<p>也可以写成:</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">fuzzware replay fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>fuzzers<span class="hljs-regexp">/fuzzer1/</span>queue/id:<span class="hljs-number">000000</span>,orig:<span class="hljs-number">01</span>_base_input_512_ones<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="‎工作分配‎"><a href="#‎工作分配‎" class="headerlink" title="‎工作分配‎"></a>‎工作分配‎</h2><p>‎    pipline 作为软件的一个重要部分，使用python ‎<a target="_blank" rel="noopener" href="https://python-rq.org/">‎rq‎</a>‎将作业推送到redis数据库。‎</p>
-<p>‎    pipline可以生成一组工作线程，这些工作线程从 redis 队列中检索作业，生成作业结果文件并将其放置在特定目录中。‎</p>
-<p>‎    管道异步观察用于添加新作业的结果文件的结果目录（在 src&#x2F;observers中实现）。观察到新文件后，将其路径添加到的某个内部结果队列中。‎</p>
-<p>​    ‎管道的主循环忙于检查队列中是否有新条目。‎‎对于给定的结果文件路径，它遵守命名‎‎约定‎‎‎，导出‎‎有关事件的信息‎ (‎例如，跟踪的输出文件对应的输入文件路径‎‎）， 并在必要时分析结果文件。然后，它将新作业推送到 redis 队列。‎</p>
-<h2 id="pipline-工作流"><a href="#pipline-工作流" class="headerlink" title="pipline 工作流:"></a>pipline 工作流:</h2><p>‎为了使导航代码更容易，此处介绍了典型的代码流。‎</p>
-<p>‎典型的作业工作流当前如下所示：</p>
-<p>​    0.调用后，<strong>fuzzware_pipeline.py</strong>创建一个<strong>session</strong>实例，该实例为<strong>fuzzer输入queue目录</strong>等目录中的新文件设置侦听器‎</p>
+<p><strong>特殊寄存器</strong>:</p>
 <ol>
-<li>‎启动后，管道开始对实例进行<strong>模糊测试</strong>，这些实例开始使用<strong>给定的配置</strong>对<strong>固件映像</strong>进行模糊测试‎</li>
-<li>‎其中一个模糊测试实例在其queue目录中生成新输入</li>
-<li>‎observers.new_fuzz_input_handler.py被触发并将文件的路径添加到主循环的模糊测试输入队列‎</li>
-<li>‎主循环检查不同的队列，并在其<code>queue_fuzz_inputs</code>成员中找到新的模糊测试输入文件的路径‎</li>
-<li>‎它计算文件的哈希值，并将新的跟踪生成作业推送到 redis 作业队列。‎</li>
-<li>‎其中一个 <strong>gen</strong> 工作线程执行此作业并为给定输入生成跟踪。它将生成的跟踪文件放在模糊测试器的<strong>trace子目录</strong>中。‎</li>
-<li>‎与 3类似，<code>observers.new_trace_file_handler.py</code>触发并将文件的路径添加到主循环的跟踪输入队列中‎</li>
-<li>‎与 4 类似，主循环在其<code>queue_traces</code>成员中注意到一个新条目‎</li>
-<li>‎与5 类似，主循环（在检查是否已创建所有跟踪类型之后）会记录新基本块跟踪中的所有基本块地址。对于跟踪文件中以前从未见过的每个 MMIO 访问，它会将 MMIO 访问状态生成作业推送到 redis 队列。‎</li>
-<li>‎与6类似，其中一个工作线程承担了这份工作，并在MMIO访问之前生成状态。它将生成的状态文件放在项目根目录的mmio_states目录中。‎</li>
-<li>‎与 3和 7一样，<code>observers.new_mmio_state_handler.py</code>触发，将路径馈送到主循环。主循环将建模作业推送到 ‎<code>modeling</code>redis 队列。</li>
-<li>‎<code>modeling</code>作业被拾取，MMIO寄存器配置使用angr生成并推送到项目根目录的<code>config_snippets</code>目录中。‎</li>
-<li>‎使用与以前相同的observer机制，新的配置代码段最终由主循环选取，并合并到项目根目录中的最新配置文件 （mmio_config.yml）。‎</li>
+<li><p>程序状态寄存器</p>
+<ul>
+<li>应用PSR(APSR) </li>
+<li>执行PSR(EPSR)</li>
+<li>中断PSR(IPSR)</li>
+</ul>
+</li>
+<li><p>PREMASK FAULTMASK BASEPRI寄存器</p>
+<p>用于异常或中断屏蔽</p>
+</li>
+<li><p>CONTROL 寄存器</p>
+<p>定义:栈指针的选择&#x2F;线程模式的访问等级</p>
+</li>
 </ol>
-<p>‎    一旦存在足够的 MMIO 模型配置更新，管道将使用更新的配置重新启动模糊测试实例，以实现更高效的模糊测试进度。‎</p>
+<p>​       位域:nPRIV(特权等级) FPCA(栈指针的选择) SPSEL(浮点上下文活跃)</p>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304105431314.png" srcset="/img/loading.gif" lazyload alt="image-20220304105431314"></p>
+<p><strong>浮点寄存器</strong>:</p>
+<ol>
+<li><p>S0-S31 D0-D15</p>
+<p>S0 -S31 都是32位寄存器，而且每个都可以通过浮点指令访问，或者利用D0-D15成对访问</p>
+</li>
+</ol>
+<p>2.浮点状态和控制寄存器(FPSCR)</p>
+<p>3.经过存储器映射的浮点单元控制寄存器</p>
+<h2 id="应用程序状态寄存器-ASPR"><a href="#应用程序状态寄存器-ASPR" class="headerlink" title="应用程序状态寄存器(ASPR)"></a>应用程序状态寄存器(ASPR)</h2><p>整数状态标志(N-Z-C-V)</p>
+<p>饱和运算的状态标志(Q)</p>
+<p>SIMD运算的状态标志(GE)</p>
+<h2 id="存储器系统"><a href="#存储器系统" class="headerlink" title="存储器系统"></a>存储器系统</h2><p><strong>特点</strong>:</p>
+<ul>
+<li>4GB 线性地址空间</li>
+<li>架构定义的存储器映射</li>
+<li>支持大端和小端的存储器系统</li>
+<li>位段访问</li>
+<li>写缓冲</li>
+<li>存储保护单元</li>
+<li>非对齐保护传输支持</li>
+</ul>
+<p><strong>存储器映射</strong></p>
+<ul>
+<li>cortex-M处理器的4GB地址空间，被划分为不同区域:<ul>
+<li>程序代码访问</li>
+<li>数据访问</li>
+<li>外设</li>
+<li>处理器内部控制和调试部件</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220304111833456.png" srcset="/img/loading.gif" lazyload alt="image-20220304111833456"></p>
+<p><strong>栈存储</strong></p>
 
             </div>
             <hr>
@@ -306,6 +374,13 @@
                   </div>
                 
                 
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ARM-Cortex-M3-M4/">ARM Cortex-M3/M4</a>
+                    
+                  </div>
+                
               </div>
               
                 <p class="note note-warning">
@@ -319,9 +394,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/03/cortex-M3%20M4/">
+                      <a href="/2022/03/04/shell/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">第三章 技术综述</span>
+                        <span class="hidden-mobile">shell 教程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -329,8 +404,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/02/paperReading/">
-                        <span class="hidden-mobile">Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing</span>
+                      <a href="/2022/03/03/fuzzware-pipline/">
+                        <span class="hidden-mobile">Fuzzware Pipline</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
