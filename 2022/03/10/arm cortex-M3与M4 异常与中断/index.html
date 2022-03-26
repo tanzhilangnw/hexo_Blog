@@ -16,20 +16,29 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Fuzzware Pipline作用该项目旨在提供涵盖fuzzware各个方面的作业分布，来fuzzing裸机固件映像。‎ ‎大多数实际工作都是由fuzzing 工作线程使用fuzzware的仿真组件作为工具执行的。实现此工具的代码驻留在fuzzware-emulator存储库中。‎ ‎所需功能的不同部分组合在一起：‎  ‎给定配置文件的二进制固件映像文件的基线模糊测试。此作业由可配置数量的模糊测">
+    <meta name="description" content="第七章 异常和中断7.1 简介:ARM中认为中断也是一种异常 异常还包括错误异常和其他用于处理OS支持的系统异常 cortex-M微控制器中，NVIC接收多个中断源产生的中断请求  最多240个IRQ(中断请求) 1个不可屏蔽中断(NMI) 1个SysTick(系统节拍)定时中断 多个系统异常  NVIC:芯片控制器，可以为ARM Cortex-M MCU 中的中断驱动事件提供快速且低延迟的响应">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fuzzware Pipline">
-<meta property="og:url" content="http://example.com/2022/03/03/fuzzware-pipline/index.html">
+<meta property="og:title" content="炭治郎の烧烤摊">
+<meta property="og:url" content="http://example.com/2022/03/10/arm%20cortex-M3%E4%B8%8EM4%20%E5%BC%82%E5%B8%B8%E4%B8%8E%E4%B8%AD%E6%96%AD/index.html">
 <meta property="og:site_name" content="炭治郎の烧烤摊">
-<meta property="og:description" content="Fuzzware Pipline作用该项目旨在提供涵盖fuzzware各个方面的作业分布，来fuzzing裸机固件映像。‎ ‎大多数实际工作都是由fuzzing 工作线程使用fuzzware的仿真组件作为工具执行的。实现此工具的代码驻留在fuzzware-emulator存储库中。‎ ‎所需功能的不同部分组合在一起：‎  ‎给定配置文件的二进制固件映像文件的基线模糊测试。此作业由可配置数量的模糊测">
+<meta property="og:description" content="第七章 异常和中断7.1 简介:ARM中认为中断也是一种异常 异常还包括错误异常和其他用于处理OS支持的系统异常 cortex-M微控制器中，NVIC接收多个中断源产生的中断请求  最多240个IRQ(中断请求) 1个不可屏蔽中断(NMI) 1个SysTick(系统节拍)定时中断 多个系统异常  NVIC:芯片控制器，可以为ARM Cortex-M MCU 中的中断驱动事件提供快速且低延迟的响应">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-03T13:36:24.882Z">
-<meta property="article:modified_time" content="2022-03-03T13:46:48.100Z">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123195720724.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123200458351.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123202647210.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123204442251.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123204908474.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123205043559.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123205302586.png">
+<meta property="og:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123205314392.png">
+<meta property="article:published_time" content="2022-03-10T08:44:57.193Z">
+<meta property="article:modified_time" content="2022-01-23T13:37:04.463Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20220123195720724.png">
   
   
-  <title>Fuzzware Pipline - 炭治郎の烧烤摊</title>
+  <title>炭治郎の烧烤摊</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -187,7 +196,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Fuzzware Pipline">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
@@ -197,8 +206,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-03 21:36" pubdate>
-        2022年3月3日 晚上
+      <time datetime="2022-03-10 16:44" pubdate>
+        2022年3月10日 下午
       </time>
     </span>
   
@@ -208,7 +217,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      1.8k 字
     </span>
   
 
@@ -217,7 +226,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21 分钟
+      16 分钟
     </span>
   
 
@@ -246,64 +255,187 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Fuzzware Pipline</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body">
-              <h1 id="Fuzzware-Pipline"><a href="#Fuzzware-Pipline" class="headerlink" title="Fuzzware Pipline"></a>Fuzzware Pipline</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>该项目旨在提供涵盖fuzzware各个方面的作业分布，来fuzzing裸机固件映像。‎</p>
-<p>‎大多数实际工作都是由fuzzing 工作线程使用fuzzware的仿真组件作为工具执行的。实现此工具的代码驻留在fuzzware-emulator存储库中。‎</p>
-<p>‎所需功能的不同部分组合在一起：‎</p>
+              <h1 id="第七章-异常和中断"><a href="#第七章-异常和中断" class="headerlink" title="第七章 异常和中断"></a>第七章 异常和中断</h1><h2 id="7-1-简介"><a href="#7-1-简介" class="headerlink" title="7.1 简介:"></a>7.1 <strong>简介</strong>:</h2><p>ARM中认为<strong>中断也是一种异常</strong></p>
+<p>异常还包括<strong>错误异常</strong>和其他用于处理<strong>OS支持的系统异常</strong></p>
+<p>cortex-M微控制器中，<strong>NVIC</strong>接收多个中断源产生的中断请求</p>
+<ul>
+<li>最多240个IRQ(中断请求)</li>
+<li>1个不可屏蔽中断(NMI)</li>
+<li>1个SysTick(系统节拍)定时中断</li>
+<li>多个系统异常</li>
+</ul>
+<p>NVIC:芯片控制器，可以为ARM Cortex-M MCU 中的中断驱动事件提供快速且低延迟的响应</p>
+<h2 id="7-2-异常类型"><a href="#7-2-异常类型" class="headerlink" title="7.2 异常类型"></a>7.2 异常类型</h2><p>编号1-15 是 系统异常 ，16以上是中断输入</p>
+<ul>
+<li>系统异常通常具有<strong>固定优先级</strong></li>
+<li>多数异常有<strong>可编程优先级</strong></li>
+</ul>
+<h2 id="7-3-中断管理简介"><a href="#7-3-中断管理简介" class="headerlink" title="7.3 中断管理简介"></a>7.3 中断管理简介</h2><ul>
+<li>SCB 和 NVIC 中有中断和异常管理的可编程寄存器</li>
+<li>SCB 和 NVIC 位于系统控制空间(SCS)<ul>
+<li>SCS 地址: 0x E000E000开始，大小为4KB</li>
+<li>有SysTick计时器，存储保护单元(MPU)</li>
+<li>该区域中基本所有的寄存器都只能由运行在特权访问等级的代码访问(除了STIR)</li>
+</ul>
+</li>
+<li>复位后，所有中断处于禁止的状态，且默认的优先级是0，在使用任何一个中断之前:<ul>
+<li>设置所需的中断优先级</li>
+<li>使能外设中断?</li>
+<li>是能NVIC中的中断</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-4-优先级定义"><a href="#7-4-优先级定义" class="headerlink" title="7.4  优先级定义"></a>7.4  优先级定义</h2><ul>
+<li>系统异常优先级固定</li>
+<li>其他异常可编程优先级 0-255</li>
+</ul>
+<p>多数情况下，为了降低编程复杂度，通过去除**LSB(优先级配置寄存器的最低位)**实现优先级的减少</p>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123195720724.png" srcset="/img/loading.gif" lazyload alt="image-20220123195720724"></p>
+<p><strong>分组</strong>(抢占)优先级和<strong>子</strong>优先级</p>
+<p>当一个中断1正在处理时，产生了一个新中断2:</p>
+<ul>
+<li>如果 抢占优先级 1&lt; 2 ，2 可以抢占进行</li>
+<li>如果 抢占优先级 2&lt;1，2 需要等待</li>
+<li>如果 抢占优先级2&#x3D;1，且1 和 2 同时到达，根据子优先级决定执行顺序</li>
+<li>如果 抢占优先级和子优先级都相等且同时到达，异常编号小的优先级更高</li>
+</ul>
+<p><strong>优先级分组</strong></p>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123200458351.png" srcset="/img/loading.gif" lazyload alt="image-20220123200458351"></p>
+<h2 id="7-5-向量表和向量表重定位"><a href="#7-5-向量表和向量表重定位" class="headerlink" title="7.5  向量表和向量表重定位"></a>7.5  向量表和向量表重定位</h2><ul>
+<li><p>向量表默认从地址0开始，向量地址则为异常编号×4</p>
+</li>
+<li><p>0x00000000中保存了MSP的初始值</p>
+</li>
+</ul>
+<p>重定位:</p>
+<ul>
+<li>使用VTOR(向量表偏移寄存器)</li>
+</ul>
+<p>早期的版本中，规定向量表必须位于SRAM或者CODE中</p>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123202647210.png" srcset="/img/loading.gif" lazyload alt="image-20220123202647210"></p>
+<p>使用VTOR时，向量表大小扩展到下一个2的整数次方，新的基址必须对齐到这个数值</p>
+<p><strong>应用</strong>:</p>
 <ol>
-<li>‎给定配置文件的二进制固件映像文件的基线模糊测试。此作业由可配置数量的模糊测试进程执行‎</li>
-<li>‎针对给定固件环境抛出输入文件时生成跟踪文件‎</li>
-<li>‎生成用于 MMIO 模型生成的 MMIO 访问状态文件‎</li>
-<li>‎使用 angr 生成 MMIO 模型‎</li>
+<li><p>具有Boot Loader 的设备</p>
+</li>
+<li><p>应用程序加载到RAM</p>
+</li>
+<li><p>动态修改向量表</p>
+</li>
 </ol>
-<h2 id="‎在fuzzware项目目录中运行输入‎"><a href="#‎在fuzzware项目目录中运行输入‎" class="headerlink" title="‎在fuzzware项目目录中运行输入‎"></a>‎在fuzzware项目目录中运行输入‎</h2><p>​    为了了解如何配置模拟器以运行由fuzzware项目目录中的fuzzer生成的输入，我们将首先以手动方式（使用原始<code>fuzzware emu</code>程序）和简单方法（使用方便包装器fuzzware replay）重现模拟器行为。‎</p>
-<p>​    将<code>project/mainXXX</code>目录与程序<code>fuzzware-fuzzware emu</code>一起使用，可以重现目录中对于给定输入，固件执行的确切行为。要重新运行给定输入文件的仿真，请使用精确配置文件fuzzware-project&#x2F;mainXXX&#x2F;config.yml 、命令行选项<code>fuzzware-project/mainXXX/extra_args.txt</code>（除了使用自定义描述的管道配置除外），用于模糊测试器输入目录或崩溃目录(<code>fuzzware-project/mainXXX/fuzzers/fuzzer1/queue/id:000000,*</code> 和<code>fuzzware-project/mainXXX/fuzzers/fuzzer1/crashes/id:000000,*</code>)之一中的输入文件 。‎</p>
-<p>​    ‎由于 <code>fuzzware emu</code>的命令行参数在‎<code>fuzzware-project/mainXXX</code>目录中可能变得不好用，因此您使用<code>fuzzware replay</code>自动将这些参数放在一起：</p>
-<p>‎以下fuzzware emu命令行（您仍然需要处理extra_args.txt中的相对路径）：‎</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs gradle">fuzzware emu -c fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>config.yml $(cat fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>extra_args.txt) fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>fuzzers<span class="hljs-regexp">/fuzzer1/</span>queue/id:<span class="hljs-number">000000</span>,orig:<span class="hljs-number">01</span>_base_input_512_ones<br></code></pre></td></tr></table></figure>
-
-<p>也可以写成:</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">fuzzware replay fuzzware-<span class="hljs-keyword">project</span><span class="hljs-regexp">/main002/</span>fuzzers<span class="hljs-regexp">/fuzzer1/</span>queue/id:<span class="hljs-number">000000</span>,orig:<span class="hljs-number">01</span>_base_input_512_ones<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="‎工作分配‎"><a href="#‎工作分配‎" class="headerlink" title="‎工作分配‎"></a>‎工作分配‎</h2><p>‎    pipline 作为软件的一个重要部分，使用python ‎<a target="_blank" rel="noopener" href="https://python-rq.org/">‎rq‎</a>‎将作业推送到redis数据库。‎</p>
-<p>‎    pipline可以生成一组工作线程，这些工作线程从 redis 队列中检索作业，生成作业结果文件并将其放置在特定目录中。‎</p>
-<p>‎    管道异步观察用于添加新作业的结果文件的结果目录（在 src&#x2F;observers中实现）。观察到新文件后，将其路径添加到的某个内部结果队列中。‎</p>
-<p>​    ‎管道的主循环忙于检查队列中是否有新条目。‎‎对于给定的结果文件路径，它遵守命名‎‎约定‎‎‎，导出‎‎有关事件的信息‎ (‎例如，跟踪的输出文件对应的输入文件路径‎‎）， 并在必要时分析结果文件。然后，它将新作业推送到 redis 队列。‎</p>
-<h2 id="pipline-工作流"><a href="#pipline-工作流" class="headerlink" title="pipline 工作流:"></a>pipline 工作流:</h2><p>‎为了使导航代码更容易，此处介绍了典型的代码流。‎</p>
-<p>‎典型的作业工作流当前如下所示：</p>
-<p>​    0.调用后，<strong>fuzzware_pipeline.py</strong>创建一个<strong>session</strong>实例，该实例为<strong>fuzzer输入queue目录</strong>等目录中的新文件设置侦听器‎</p>
-<ol>
-<li>‎启动后，管道开始对实例进行<strong>模糊测试</strong>，这些实例开始使用<strong>给定的配置</strong>对<strong>固件映像</strong>进行模糊测试‎</li>
-<li>‎其中一个模糊测试实例在其queue目录中生成新输入</li>
-<li>‎observers.new_fuzz_input_handler.py被触发并将文件的路径添加到主循环的模糊测试输入队列‎</li>
-<li>‎主循环检查不同的队列，并在其<code>queue_fuzz_inputs</code>成员中找到新的模糊测试输入文件的路径‎</li>
-<li>‎它计算文件的哈希值，并将新的跟踪生成作业推送到 redis 作业队列。‎</li>
-<li>‎其中一个 <strong>gen</strong> 工作线程执行此作业并为给定输入生成跟踪。它将生成的跟踪文件放在模糊测试器的<strong>trace子目录</strong>中。‎</li>
-<li>‎与 3类似，<code>observers.new_trace_file_handler.py</code>触发并将文件的路径添加到主循环的跟踪输入队列中‎</li>
-<li>‎与 4 类似，主循环在其<code>queue_traces</code>成员中注意到一个新条目‎</li>
-<li>‎与5 类似，主循环（在检查是否已创建所有跟踪类型之后）会记录新基本块跟踪中的所有基本块地址。对于跟踪文件中以前从未见过的每个 MMIO 访问，它会将 MMIO 访问状态生成作业推送到 redis 队列。‎</li>
-<li>‎与6类似，其中一个工作线程承担了这份工作，并在MMIO访问之前生成状态。它将生成的状态文件放在项目根目录的mmio_states目录中。‎</li>
-<li>‎与 3和 7一样，<code>observers.new_mmio_state_handler.py</code>触发，将路径馈送到主循环。主循环将建模作业推送到 ‎<code>modeling</code>redis 队列。</li>
-<li>‎<code>modeling</code>作业被拾取，MMIO寄存器配置使用angr生成并推送到项目根目录的<code>config_snippets</code>目录中。‎</li>
-<li>‎使用与以前相同的observer机制，新的配置代码段最终由主循环选取，并合并到项目根目录中的最新配置文件 （mmio_config.yml）。‎</li>
-</ol>
-<p>‎    一旦存在足够的 MMIO 模型配置更新，管道将使用更新的配置重新启动模糊测试实例，以实现更高效的模糊测试进度。‎</p>
+<h2 id="7-6-中断输入和挂起行为"><a href="#7-6-中断输入和挂起行为" class="headerlink" title="7.6 中断输入和挂起行为"></a>7.6 中断输入和挂起行为</h2><p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123204442251.png" srcset="/img/loading.gif" lazyload alt="image-20220123204442251"></p>
+<ul>
+<li>如果一个中断被抢占，挂起状态被软件清除，那么中断请求会被取消且不再得到处理</li>
+</ul>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123204908474.png" srcset="/img/loading.gif" lazyload alt="image-20220123204908474"></p>
+<ul>
+<li>外设持续保持某个中断请求，即使软件尝试清除挂起，挂起状态会再次置位</li>
+</ul>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123205043559.png" srcset="/img/loading.gif" lazyload alt="image-20220123205043559"></p>
+<ul>
+<li><p>中断处理后，中断源继续请求，中断会再次进入挂起状态且得到服务</p>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123205302586.png" srcset="/img/loading.gif" lazyload alt="image-20220123205302586"></p>
+</li>
+<li><p>对于脉冲式的请求，在中断处理之前请求多次，视作1次中断请求</p>
+</li>
+</ul>
+<p><img src="C:\Users\xp\AppData\Roaming\Typora\typora-user-images\image-20220123205314392.png" srcset="/img/loading.gif" lazyload alt="image-20220123205314392"></p>
+<ul>
+<li>中断的挂起状态可以在其正被处理时再次置位</li>
+</ul>
+<h2 id="7-7-异常流程简介"><a href="#7-7-异常流程简介" class="headerlink" title="7.7 异常流程简介"></a>7.7 异常流程简介</h2><p>接收异常请求的条件:</p>
+<ul>
+<li>处理器正在运行 </li>
+<li>异常使能</li>
+<li>异常优先级高于当前</li>
+<li>异常未被屏蔽</li>
+</ul>
+<p>异常进入:</p>
+<ul>
+<li>相关寄存器和返回地址入栈</li>
+<li>取出异常向量</li>
+<li>取出待执行异常处理的指令</li>
+<li>更新NVIC寄存器和内核寄存器(PSR,LR,PC,SP)<ul>
+<li>LR 更名为EXEC_RETURN ，保存异常处理的状态信息</li>
+<li>PC变为异常处理的起始地址</li>
+</ul>
+</li>
+</ul>
+<p>异常执行:</p>
+<ul>
+<li>使用MSP(主栈指针)</li>
+<li>如果更高优先级的异常产生，处理器接受新的中断，称为异常嵌套</li>
+</ul>
+<p>异常返回:</p>
+<ul>
+<li>使用EXEC_RETURN数值触发异常返回</li>
+<li>处理器访问栈空间，恢复之前压栈的值到相应寄存器</li>
+</ul>
+<h2 id="7-8-NVIC"><a href="#7-8-NVIC" class="headerlink" title="7.8 NVIC"></a>7.8 NVIC</h2><p>NVIC中有多个用于中断控制的寄存器</p>
+<ul>
+<li>中断设置&#x2F;清除使能寄存器</li>
+<li>中断设置&#x2F;清除挂起寄存器</li>
+<li>中断活跃位寄存器</li>
+<li>中断优先级寄存器</li>
+<li>软件触发中断寄存器</li>
+</ul>
+<p>系统复位时，所有中断:</p>
+<ul>
+<li>禁用</li>
+<li>优先级为0</li>
+<li>挂起清除</li>
+</ul>
+<h2 id="7-9-SCB"><a href="#7-9-SCB" class="headerlink" title="7.9 SCB"></a>7.9 SCB</h2><p>中断控制和状态寄存器(ICSR):</p>
+<ul>
+<li>设置&#x2F;清除<strong>系统异常</strong>的挂起状态</li>
+<li>确定当前异常&#x2F;中断编号</li>
+</ul>
+<p>向量偏移寄存器(VTOR)(见7.5)</p>
+<p>应用中断和复位控制寄存器(AIRCR)：</p>
+<ul>
+<li>控制异常&#x2F;中断优先级管理中的优先级分组</li>
+<li>提供系统的端信息</li>
+<li>提供自复位</li>
+</ul>
+<p>系统处理优先级寄存器(SCB$\rightarrow$SHP[0~11])</p>
+<p>系统处理控制和状态寄存器(SCB$\rightarrow$SHCSR)</p>
+<ul>
+<li>控制使用错误,存储器管理错误和总线错误</li>
+<li>得到错误的挂起状态和多数系统异常的活跃状态</li>
+</ul>
+<h2 id="7-10-特殊寄存器"><a href="#7-10-特殊寄存器" class="headerlink" title="7.10 特殊寄存器"></a>7.10 特殊寄存器</h2><p><strong>PRIMASK</strong>:</p>
+<ul>
+<li>禁止除NMI和HardFault外的所有异常</li>
+<li>实质是将当前优先级改为最高的可编程优先级0</li>
+</ul>
+<p><strong>FAULTMASK</strong>:</p>
+<ul>
+<li>将当前优先级改为-1，只有NMI异常可以处理</li>
+</ul>
+<p><strong>BASEPRI</strong>：</p>
+<ul>
+<li>禁止低于某特定等级的中断</li>
+</ul>
+<h2 id="7-11-设置中断示例"><a href="#7-11-设置中断示例" class="headerlink" title="7.11 设置中断示例"></a>7.11 设置中断示例</h2><p>不进行向量表重定向</p>
+<ul>
+<li>设置优先级分组</li>
+<li>设置中断的优先级</li>
+<li>在NVIC&#x2F;外设中使能中断</li>
+</ul>
+<p>进行向量表重定向(参考7.5代码)</p>
+<ul>
+<li>若需要将向量表重定位到SRAM，则复制当前向量到SRAM中的新位置</li>
+<li>设置向量表偏移寄存器指向新的向量表</li>
+<li>更新异常向量</li>
+</ul>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8/">物联网安全</a>
-                    
-                  </div>
                 
                 
               </div>
@@ -319,18 +451,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/03/cortex-M3%20M4/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ARM Cortex-M3/M4</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/02/paperReading/">
-                        <span class="hidden-mobile">Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing</span>
+                      <a href="/2022/03/07/linux/">
+                        <span class="hidden-mobile">常用Linux 命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
