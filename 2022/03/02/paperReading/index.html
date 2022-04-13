@@ -16,26 +16,26 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="摘要​    随着嵌入式设备在我们的日常生活中变得越来越普遍，它们成为了对手的一个有吸引力的攻击目标。尽管它们的价值很高，攻击面也很大，但对于此类设备来说，应用模糊测试等自动化测试技术并不简单。由于在受限制的嵌入式设备上对固件进行模糊测试效率低下，最先进的方法反而选择在模拟器中运行固件（通过一个称为重新托管的过程）。然而，现有的方法要么使用硬件行为的粗粒度静态模型，要么需要手动重新托管固件。  ​">
+    <meta name="description" content="Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing摘要​    随着嵌入式设备在我们的日常生活中变得越来越普遍，它们成为了对手的一个有吸引力的攻击目标。尽管它们的价值很高，攻击面也很大，但对于此类设备来说，应用模糊测试等自动化测试技术并不简单。由于在受限制的嵌入式设备上对固件进行模糊测试效率低下，最先进的方法反而选">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing">
+<meta property="og:title" content="Fuzzware">
 <meta property="og:url" content="http://example.com/2022/03/02/paperReading/index.html">
 <meta property="og:site_name" content="炭治郎の烧烤摊">
-<meta property="og:description" content="摘要​    随着嵌入式设备在我们的日常生活中变得越来越普遍，它们成为了对手的一个有吸引力的攻击目标。尽管它们的价值很高，攻击面也很大，但对于此类设备来说，应用模糊测试等自动化测试技术并不简单。由于在受限制的嵌入式设备上对固件进行模糊测试效率低下，最先进的方法反而选择在模拟器中运行固件（通过一个称为重新托管的过程）。然而，现有的方法要么使用硬件行为的粗粒度静态模型，要么需要手动重新托管固件。  ​">
+<meta property="og:description" content="Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing摘要​    随着嵌入式设备在我们的日常生活中变得越来越普遍，它们成为了对手的一个有吸引力的攻击目标。尽管它们的价值很高，攻击面也很大，但对于此类设备来说，应用模糊测试等自动化测试技术并不简单。由于在受限制的嵌入式设备上对固件进行模糊测试效率低下，最先进的方法反而选">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/03/03/iLHIJmpdCMaT5gh.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/03/pSmCKDbaTsV7f5g.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/03/Y5q29rngwPOiatM.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/03/IZJnSjPx3W6b2EX.png">
 <meta property="article:published_time" content="2022-03-02T08:51:41.878Z">
-<meta property="article:modified_time" content="2022-03-03T05:47:34.579Z">
+<meta property="article:modified_time" content="2022-04-13T10:11:12.512Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="论文阅读">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://s2.loli.net/2022/03/03/iLHIJmpdCMaT5gh.png">
   
   
-  <title>Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing - 炭治郎の烧烤摊</title>
+  <title>Fuzzware - 炭治郎の烧烤摊</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -193,7 +193,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing">
+            <span class="h2" id="subtitle" title="Fuzzware">
               
             </span>
 
@@ -223,7 +223,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      118 分钟
+      119 分钟
     </span>
   
 
@@ -252,10 +252,10 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing</h1>
+            <h1 style="display: none">Fuzzware</h1>
             
             <div class="markdown-body">
-              <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>​    随着嵌入式设备在我们的日常生活中变得越来越普遍，它们成为了对手的一个有吸引力的攻击目标。尽管它们的价值很高，攻击面也很大，但对于此类设备来说，应用模糊测试等自动化测试技术并不简单。由于在受限制的嵌入式设备上对固件进行模糊测试效率低下，最先进的方法反而选择在模拟器中运行固件（通过一个称为重新托管的过程）。然而，现有的方法要么使用硬件行为的粗粒度静态模型，要么需要手动重新托管固件。 </p>
+              <h1 id="Fuzzware-Using-Precise-MMIO-Modeling-for-effective-FirmWare-Fuzzing"><a href="#Fuzzware-Using-Precise-MMIO-Modeling-for-effective-FirmWare-Fuzzing" class="headerlink" title="Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing"></a>Fuzzware-Using Precise MMIO Modeling for effective FirmWare Fuzzing</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>​    随着嵌入式设备在我们的日常生活中变得越来越普遍，它们成为了对手的一个有吸引力的攻击目标。尽管它们的价值很高，攻击面也很大，但对于此类设备来说，应用模糊测试等自动化测试技术并不简单。由于在受限制的嵌入式设备上对固件进行模糊测试效率低下，最先进的方法反而选择在模拟器中运行固件（通过一个称为重新托管的过程）。然而，现有的方法要么使用硬件行为的粗粒度静态模型，要么需要手动重新托管固件。 </p>
 <p>​    我们提出了一种轻量级程序分析、重新托管和模糊测试的新组合(Fuzzware)来应对这些挑战。我们介绍了FUZZWARE的设计和实现，FUZZWARE是一个纯软件系统，用于以可扩展的方式对未修改的单片固件进行模糊测试。通过确定固件逻辑实际使用硬件生成值的方式，FUZZWARE可以自动生成模型，帮助将模糊化过程集中在重要输入的变异上，从而显著提高效率。 </p>
 <p>​    我们在合成目标和真实目标上分别评估了我们的方法，这些目标包括总共19个硬件平台和77个固件映像。与最先进的工作相比，FUZZWARE实现了高达3.25倍的代码覆盖率，我们的建模方法将输入空间的大小减少了95.5%。合成样本包含66个针对各种硬件交互的单元测试，我们发现我们的方法是第一个自动通过所有测试的通用重新托管解决方案。FUZZWARE发现了15个全新的bug，包括之前由其他工作分析的目标中的bug,获得了12项CVE。 </p>
 <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><p>​    嵌入式系统已经渗透到我们的日常生活中，推动我们的社会向一个互联的“智能”世界过渡。安全性起着支持作用，安全连接设备的第一步是以高效且可扩展的方式主动识别其安全漏洞。 实现这一目标的一种方法是自动模糊测试(fuzzing)。不幸的是，嵌入式设备的模糊测试具有挑战性[39]。由于硬件资源有限导致模糊化速度较低，因此设备上的模糊化对于固件来说是不切实际的[21]。以完全黑盒的方式模糊设备[9]会导致缺少反馈和有限的碰撞检测，这极大地限制了模糊器的有效性[21,25,42]。同样，由于需要同步硬件和仿真环境，设备“在回路中”的模糊化[38,39]也会导致资源限制。 </p>
